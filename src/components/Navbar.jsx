@@ -12,7 +12,7 @@ const Navbar = () => {
 
 
     return (
-        <nav className="flex justify-between items-center px-8 py-4 shadow-sm ">
+        <nav className="flex justify-between items-center lg:px-8 px-1 py-4 shadow-sm ">
             {/* Left: Logo + Menu */}
             <div className="flex items-center gap-10">
                 {/* Logo */}
@@ -20,7 +20,7 @@ const Navbar = () => {
                     <div className="w-10 h-10  rounded-full mr-2">
                         <img src={logo} alt="" />
                     </div>
-                    <h1 className="font-bold text-black">
+                    <h1 className="font-bold text-neutral">
                         <Link to={'/'} >
                             ExploreBD
                         </Link>
@@ -32,7 +32,7 @@ const Navbar = () => {
                 {/* Menu Items */}
                 <ul className="hidden md:flex items-center gap-6 text-sm  font-medium">
                     <NavLink to={'/'} className={({ isActive }) =>
-                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-black font-bold ${isActive
+                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-neutral font-bold ${isActive
                             ? "bg-gray-950 text-white font-bold"
                             : "font-bold hover:bg-red-100 "
                         }`
@@ -42,7 +42,7 @@ const Navbar = () => {
                         <House></House>  Home
                     </NavLink>
                     <NavLink to={'/all-packages'} className={({ isActive }) =>
-                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-black font-bold ${isActive
+                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-neutral font-bold ${isActive
                             ? "bg-gray-950 text-white font-bold"
                             : "font-bold hover:bg-red-100"
                         }`
@@ -54,7 +54,7 @@ const Navbar = () => {
 
                     </NavLink>
                     <NavLink to={'/about-us'} className={({ isActive }) =>
-                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-black font-bold ${isActive
+                        `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-neutral font-bold ${isActive
                             ? "bg-gray-950 text-white font-bold"
                             : "font-bold hover:bg-red-100"
                         }`
@@ -66,7 +66,7 @@ const Navbar = () => {
                         user ? <div>
 
                             <NavLink to={'/my-bookings'} className={({ isActive }) =>
-                                `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-black font-bold ${isActive
+                                `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-neutral font-bold ${isActive
                                     ? "bg-gray-950 text-white font-bold"
                                     : "font-bold hover:bg-red-100"
                                 }`
@@ -82,7 +82,7 @@ const Navbar = () => {
                 <div>
                     <label className="swap swap-rotate">
                         {/* this hidden checkbox controls the state */}
-                        <input type="checkbox" className="theme-controller" value="synthwave" />
+                        <input type="checkbox" className="theme-controller" value="dark" />
 
                         {/* sun icon */}
                         <svg

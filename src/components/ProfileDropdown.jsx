@@ -1,7 +1,4 @@
-
-
-
-import { LogOut, UserPen, PackagePlus, PackageSearch } from 'lucide-react';
+import { LogOut, UserPen, PackagePlus, PackageSearch, BookImage, Info, Package, Home } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
@@ -10,21 +7,9 @@ const ProfileDropdown = () => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
-    // const handleLogout = async () => {
-    //     try {
-    //         await logout();
-    //         navigate('/login');
-    //     } catch (error) {
-    //         console.error('Logout failed:', error.message);
-    //     }
-    // };
-
-
     const handleLogout = () => {
-
         Swal.fire({
             title: "Are you sure?",
-            // text: "You won't be able to revert this!",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
@@ -32,20 +17,14 @@ const ProfileDropdown = () => {
             confirmButtonText: "Yes, Logout !"
         }).then((result) => {
             if (result.isConfirmed) {
-                logout()
+                logout();
                 Swal.fire({
-                    title: "LogOut!",
-                    // text: "Loged Out",
+                    title: "Logged Out!",
                     icon: "success"
                 });
             }
         });
-
-    }
-    // console.log(user?.photoURL);
-
-
-
+    };
 
     return (
         <div className="dropdown dropdown-end">
@@ -59,6 +38,35 @@ const ProfileDropdown = () => {
                 tabIndex={0}
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-56"
             >
+                {/* Mobile-only links */}
+                <div className="block lg:hidden">
+                    <li>
+                        <Link to="/">
+                            <Home className="w-4 h-4" />
+                            Home
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/all-packages">
+                            <Package className="w-4 h-4" />
+                            All Packages
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/about-us">
+                            <Info className="w-4 h-4" />
+                            About Us
+                        </Link>
+                    </li>
+                    <li>
+                        <Link to="/my-bookings">
+                            <BookImage className="w-4 h-4" />
+                            My Bookings
+                        </Link>
+                    </li>
+                </div>
+
+                {/* Always visible links */}
                 <li>
                     <Link to="/add-packages">
                         <PackagePlus className="w-4 h-4" />
@@ -72,7 +80,10 @@ const ProfileDropdown = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to={'/profile-update'}><UserPen className="w-4 h-4" />Profile</Link>
+                    <Link to="/profile-update">
+                        <UserPen className="w-4 h-4" />
+                        Profile
+                    </Link>
                 </li>
                 <li>
                     <button onClick={handleLogout}>
@@ -80,10 +91,10 @@ const ProfileDropdown = () => {
                         Logout
                     </button>
                 </li>
-
             </ul>
         </div>
     );
 };
 
 export default ProfileDropdown;
+

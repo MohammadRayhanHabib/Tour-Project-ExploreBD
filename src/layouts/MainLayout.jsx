@@ -12,7 +12,10 @@ const MainLayout = () => {
 
     return (
         <div>
-            <Navbar></Navbar>
+            <nav className='lg:max-w-[1440px] mx-auto'>
+
+                <Navbar></Navbar>
+            </nav>
             {/* <Outlet></Outlet> */}
             <div>
 
