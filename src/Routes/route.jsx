@@ -14,6 +14,7 @@ import AddPackages from "../pages/AddPackages";
 import ManageMyPackages from "../pages/ManageMyPackages";
 import PrivateRoute from "../context/PrivateRoute";
 import Profile from "../pages/Profile";
+import MyBookings from "../pages/MyBookings";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -55,9 +56,18 @@ export const router = createBrowserRouter([
             {
                 path: 'profile-update',
 
-                element: <Profile></Profile>
+                element: <PrivateRoute>
+                    <Profile></Profile>
+                </PrivateRoute>
 
-            }
+            },
+            {
+                path: 'my-bookings',
+                element: <PrivateRoute>
+                    <MyBookings></MyBookings>
+                </PrivateRoute>
+            },
+
         ]
     },
 ]);

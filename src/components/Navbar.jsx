@@ -1,4 +1,4 @@
-import { House, Package, Info } from "lucide-react";
+import { BookImage, House, Package, Info } from "lucide-react";
 import React from "react";
 import { Link, NavLink } from "react-router";
 import logo from "../../public/airplane.png"
@@ -8,30 +8,6 @@ import ProfileDropdown from "./ProfileDropdown";
 const Navbar = () => {
     const { user } = useAuth();
 
-
-    // const handleLogout = () => {
-
-    //     Swal.fire({
-    //         title: "Are you sure?",
-    //         // text: "You won't be able to revert this!",
-    //         icon: "warning",
-    //         showCancelButton: true,
-    //         confirmButtonColor: "#3085d6",
-    //         cancelButtonColor: "#d33",
-    //         confirmButtonText: "Yes, Logout !"
-    //     }).then((result) => {
-    //         if (result.isConfirmed) {
-    //             logout()
-    //             Swal.fire({
-    //                 title: "LogOut!",
-    //                 // text: "Loged Out",
-    //                 icon: "success"
-    //             });
-    //         }
-    //     });
-
-    // }
-    // console.log(user);
 
 
 
@@ -86,7 +62,19 @@ const Navbar = () => {
 
                         <Info></Info>About Us
                     </NavLink>
+                    {
+                        user ? <div>
 
+                            <NavLink to={'/my-bookings'} className={({ isActive }) =>
+                                `group flex items-center px-3 py-2 rounded-lg transition-all duration-300 text-black font-bold ${isActive
+                                    ? "bg-gray-950 text-white font-bold"
+                                    : "font-bold hover:bg-red-100"
+                                }`
+                            }>
+                                <BookImage />  MyBookings
+                            </NavLink>
+                        </div> : <div></div>
+                    }
                 </ul>
             </div>
             {/* Right: Buttons */}
