@@ -11,6 +11,9 @@ import Register from "../pages/Register";
 import AboutUs from "../pages/AboutUs";
 import AllPackages from "../pages/AllPackages";
 import AddPackages from "../pages/AddPackages";
+import ManageMyPackages from "../pages/ManageMyPackages";
+import PrivateRoute from "../context/PrivateRoute";
+import Profile from "../pages/Profile";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -38,7 +41,22 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'add-packages',
-                Component: AddPackages
+
+                element: <PrivateRoute>
+                    <AddPackages></AddPackages>
+                </PrivateRoute>
+            },
+            {
+                path: 'manage-my-packages',
+                element: <PrivateRoute>
+                    <ManageMyPackages></ManageMyPackages>
+                </PrivateRoute>
+            },
+            {
+                path: 'profile-update',
+                element: <PrivateRoute>
+                    <Profile></Profile>
+                </PrivateRoute>
             }
         ]
     },
