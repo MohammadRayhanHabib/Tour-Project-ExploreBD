@@ -1,7 +1,7 @@
 
 
 
-import { LogOut, PackagePlus, PackageSearch } from 'lucide-react';
+import { LogOut, UserPen, PackagePlus, PackageSearch } from 'lucide-react';
 import { Link, useNavigate } from 'react-router';
 import { useAuth } from '../context/AuthContext';
 import Swal from 'sweetalert2';
@@ -42,7 +42,7 @@ const ProfileDropdown = () => {
         });
 
     }
-    console.log(user);
+    // console.log(user?.photoURL);
 
 
 
@@ -51,7 +51,7 @@ const ProfileDropdown = () => {
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src={user?.photoURL || '/default-profile.png'} alt="User Avatar" />
+                    <img src={user?.photoURL} alt="User Avatar" />
                 </div>
             </div>
 
@@ -72,13 +72,13 @@ const ProfileDropdown = () => {
                     </Link>
                 </li>
                 <li>
+                    <Link to={'/profile-update'}><UserPen className="w-4 h-4" />Profile</Link>
+                </li>
+                <li>
                     <button onClick={handleLogout}>
                         <LogOut className="w-4 h-4" />
                         Logout
                     </button>
-                </li>
-                <li>
-                    <Link to={'/profile-update'}>Profile</Link>
                 </li>
 
             </ul>

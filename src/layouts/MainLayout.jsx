@@ -1,12 +1,28 @@
 import React from 'react';
 import Navbar from "../components/Navbar"
-import { Outlet } from 'react-router';
+import { Outlet, useNavigation } from 'react-router';
 import Footer from '../components/Footer';
+import { useAuth } from '../context/AuthContext';
+import Loading from '../components/Loading';
 const MainLayout = () => {
+    const { loading: authLoading } = useAuth();
+    const navigation = useNavigation();
+
+
+
     return (
         <div>
             <Navbar></Navbar>
-            <Outlet></Outlet>
+            {/* <Outlet></Outlet> */}
+            <div>
+
+                {authLoading || navigation.state === 'loading' ? (
+                    <Loading />
+                ) : (
+                    <Outlet />
+                )}
+
+            </div>
             <Footer></Footer>
         </div>
     );
