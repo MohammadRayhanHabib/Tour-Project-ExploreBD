@@ -1,10 +1,12 @@
 import { useState } from "react";
-
-import axios from "axios"
+import axios from "axios";
+import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
+
 const AddPackages = () => {
-    const { user } = useAuth(); // Must include displayName, email, photoURL
-    const [formData, setFormData] = useState({
+    const { user } = useAuth();
+
+    const initialFormData = {
         tour_name: "",
         image: "",
         duration: "",
@@ -13,12 +15,15 @@ const AddPackages = () => {
         price: "",
         departure_date: "",
         package_details: "",
-        contactNo: "",
-    });
+        guide_contact_no: "",
+    };
+
+    const [formData, setFormData] = useState(initialFormData);
+    const [activeTab, setActiveTab] = useState("form");
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData(prev => ({ ...prev, [name]: value }));
+        setFormData((prev) => ({ ...prev, [name]: value }));
     };
 
     const handleSubmit = async (e) => {
@@ -27,49 +32,96 @@ const AddPackages = () => {
         const newPackage = {
             ...formData,
             price: parseFloat(formData.price),
+            guide_contact_no: parseInt(formData.guide_contact_no),
             guide_name: user?.displayName || "Unknown",
             guide_email: user?.email || "N/A",
             guide_photo: user?.photoURL || "",
         };
 
-        // TODO: Replace with your fetch/axios POST request
-        axios.post('http://localhost:3000/tour-packages', newPackage)
-            .then(res => {
-                console.log(res.data);
-
-            })
-        console.log("Submitted Package:", newPackage);
-        // Show toast on success (e.g., react-hot-toast or SweetAlert2)
+        try {
+            const res = await axios.post("http://localhost:3000/tour-packages", newPackage);
+            if (res.data.insertedId) {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Package Added Successfully!",
+                    showConfirmButton: false,
+                    timer: 1500,
+                });
+                setFormData(initialFormData);
+            }
+        } catch (error) {
+            console.error("Error adding package:", error);
+        }
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-8 bg-white rounded-lg shadow-lg mt-10">
-            <h2 className="text-2xl font-bold mb-6">Add Tour Package</h2>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="number" name="price" placeholder="Price" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="date" name="departure_date" required onChange={handleChange} className="input input-bordered w-full" />
-                <input type="text" name="contactNo" placeholder="Contact No." required onChange={handleChange} className="input input-bordered w-full" />
-                <textarea name="package_details" placeholder="Package Details" required rows="3" onChange={handleChange} className="textarea textarea-bordered w-full col-span-1 md:col-span-2" />
+        <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url('https://i.pinimg.com/736x/2c/8e/39/2c8e3992dd190f14e5fb5d52bbe11a1a.jpg')` }}>
+            <div className="bg-black/80 backdrop-blur-xs rounded-xl shadow-2xl max-w-6xl w-full">
 
-                {/* Guide Info (Read-only) */}
-                <input type="text" value={user?.displayName || ""} readOnly className="input input-bordered bg-gray-100 w-full" />
-                <input type="email" value={user?.email || ""} readOnly className="input input-bordered bg-gray-100 w-full" />
-                <div className="flex items-center space-x-4 mt-2 col-span-1 md:col-span-2">
-                    <span className="font-medium">Guide Photo:</span>
-                    {user?.photoURL ? (
-                        <img src={user.photoURL} alt="Guide" className="w-12 h-12 rounded-full border" />
-                    ) : (
-                        <span>No photo</span>
-                    )}
+                {/* Dropdown Tabs */}
+                <div className="flex justify-center gap-6 pt-6">
+                    <button onClick={() => setActiveTab("guide")} className={`px-6 py-2 rounded-lg font-semibold ${activeTab === "guide" ? "bg-white text-black" : "bg-black text-white border border-white"}`}>Guide Info</button>
+                    <button onClick={() => setActiveTab("form")} className={`px-6 py-2 rounded-lg font-semibold ${activeTab === "form" ? "bg-white text-black" : "bg-black text-white border border-white"}`}>Tour Form</button>
                 </div>
 
-                <button type="submit" className="btn btn-primary col-span-1 md:col-span-2 mt-4">Submit Package</button>
-            </form>
+                <div className="p-10">
+                    {activeTab === "guide" && (
+                        <div className="text-white text-center space-y-6">
+                            <div>
+                                {user?.photoURL ? (
+                                    <img src={user.photoURL} alt="Guide" className="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-xl" />
+                                ) : (
+                                    <div className="w-24 h-24 mx-auto rounded-full bg-gray-300 flex items-center justify-center text-gray-600">No Photo</div>
+                                )}
+                            </div>
+                            <h2 className="text-xl font-bold">{user?.displayName || "Unknown Guide"}</h2>
+                            <p className="text-sm font-medium">Email: {user?.email || "Not Provided"}</p>
+                        </div>
+                    )}
+
+                    {activeTab === "form" && (
+                        <>
+                            <h2 className="text-3xl font-bold text-center text-white mb-8">Add Tour Package</h2>
+                            {/* <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-10 p-2 rounded-xl text-black w-full">
+                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white/80" />
+                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white/80" />
+                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white/80" />
+                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white/80" />
+                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white/80" />
+                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white/80" />
+                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white/80" />
+                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white/80 " />
+                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered w-full   md:col-span-2 bg-white/80 " />
+                                <button type="submit" className="btn btn-white text-black md:col-span-2 w-full">Submit Package</button>
+                            </form> */}
+
+                            <form
+                                onSubmit={handleSubmit}
+                                className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-10 p-2 rounded-xl text-black w-full"
+                            >
+                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white/80 w-full" />
+                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white/80 w-full" />
+                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white/80 w-full" />
+
+                                {/* Textarea takes full width */}
+                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered bg-white/80 w-full md:col-span-2" />
+
+                                {/* Submit button takes full width too */}
+                                <button type="submit" className="btn btn-white text-black w-full md:col-span-2">
+                                    Submit Package
+                                </button>
+                            </form>
+
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
     );
 };
