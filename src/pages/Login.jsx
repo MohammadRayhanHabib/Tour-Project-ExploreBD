@@ -67,8 +67,10 @@ const Login = () => {
                 <title>Login</title>
             </Helmet>
 
-            <div className="min-h-screen flex items-center justify-center bg-base-200 py-12 px-4">
-                <div className="w-full max-w-md bg-base-100 shadow-xl rounded-xl p-8">
+            <div className="min-h-screen flex items-center justify-center  py-12 px-4">
+                <div className="w-full max-w-md bg-base-100  border border-neutral/20 rounded-xl p-8
+        shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-content   cursor-pointer
+                ">
                     <h2 className="text-3xl font-bold text-center mb-6 text-base-content">Login Please</h2>
 
                     {error && (
@@ -162,7 +164,7 @@ const Login = () => {
 
                     <p className="mt-6 text-center text-sm">
                         Don't have an account?{" "}
-                        <Link to="/register" className="link link-primary font-bold">
+                        <Link to="/register" className="link link-neutral font-bold">
                             Register now
                         </Link>
                     </p>

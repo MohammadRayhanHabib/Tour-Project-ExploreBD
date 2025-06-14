@@ -30,7 +30,7 @@ const ProfileDropdown = () => {
         <div className="dropdown dropdown-end">
             <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
                 <div className="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
-                    <img src={user?.photoURL} alt="User Avatar" />
+                    <img src={user?.photoURL || `https://i.pinimg.com/736x/74/41/d1/7441d10874bdd20be48a921100b878e8.jpg`} alt="User Avatar" />
                 </div>
             </div>
 

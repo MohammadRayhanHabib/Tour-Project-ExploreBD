@@ -62,8 +62,12 @@ const Register = () => {
             <Helmet>
                 <title>Register</title>
             </Helmet>
-            <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
-                <div className="w-full max-w-md bg-base-100 shadow-xl rounded-xl p-8">
+            <div className="min-h-screen flex items-center justify-center  px-4">
+                <div className="   rounded-xl p-8 
+w-full max-w-md bg-base-100  border border-neutral/20 
+        shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-content   cursor-pointer
+                
+                ">
                     <h2 className="text-center text-3xl font-bold text-primary mb-1">
                         Create Account
                     </h2>
@@ -191,7 +195,7 @@ const Register = () => {
                         </Link>
                     </p>
                 </div>
-            </div>
+            </div >
         </>
     );
 };

@@ -38,7 +38,7 @@ const Profile = () => {
                 <title>Profile | Dashboard</title>
             </Helmet>
 
-            <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+            <div className="min-h-screen flex items-center justify-center  p-4">
                 <div className="relative w-full max-w-[400px] bg-white rounded-xl shadow-lg overflow-hidden">
                     {/* Header with Photo */}
                     <div className="bg-rose-700 h-32 flex items-center justify-center">
@@ -73,7 +73,7 @@ const Profile = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Name</label>
                                 <input
                                     type="text"
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                                    className="w-full text-black px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                                     value={name}
                                     onChange={(e) => setName(e.target.value)}
                                     placeholder="Enter your name"
@@ -85,7 +85,7 @@ const Profile = () => {
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Photo URL</label>
                                 <input
                                     type="url"
-                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
+                                    className="w-full px-3 py-2 text-black border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-rose-500"
                                     value={photoURL}
                                     onChange={(e) => setPhotoURL(e.target.value)}
                                     placeholder="Enter photo URL"
