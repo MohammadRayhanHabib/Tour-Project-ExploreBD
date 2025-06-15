@@ -11,7 +11,7 @@ const MainLayout = () => {
 
 
     return (
-        <div>
+        <div className=''>
             <nav className=' '>
 
                 <Navbar></Navbar>

@@ -100,17 +100,17 @@ const AddPackages = () => {
                                 onSubmit={handleSubmit}
                                 className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-10 p-2 rounded-xl text-black w-full"
                             >
-                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white/80 w-full" />
-                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white/80 w-full" />
-                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white/80 w-full" />
-                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white/80 w-full" />
-                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white/80 w-full" />
-                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white/80 w-full" />
-                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white/80 w-full" />
-                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white/80 w-full" />
+                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white w-full " />
+                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white w-full" />
+                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white w-full" />
+                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white w-full" />
+                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white w-full" />
+                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white w-full" />
+                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white w-full" />
+                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white w-full" />
 
                                 {/* Textarea takes full width */}
-                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered bg-white/80 w-full md:col-span-2" />
+                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered bg-white w-full md:col-span-2" />
 
                                 {/* Submit button takes full width too */}
                                 <button type="submit" className="btn btn-white text-black w-full md:col-span-2">

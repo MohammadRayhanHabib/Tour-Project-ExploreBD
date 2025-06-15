@@ -16,7 +16,7 @@ const Banner = () => {
             <div className="absolute inset-0 bg-black/40" />
 
             {/* Main Content */}
-            <div className="relative z-10 w-full max-w-[1660px] px-4 sm:px-6 lg:px-8 py-16 sm:py-24 mx-auto">
+            <div className="relative z-10 w-full max-w-[1280px] px-4 sm:px-6 lg:px-8 py-16 sm:py-24 mx-auto">
                 <div className="backdrop-blur-md bg-white/10 dark:bg-black/20 border border-white/20 rounded-3xl p-6 sm:p-12 shadow-xl">
                     {/* Decorative Floating Elements */}
                     <div className="absolute -top-4 -right-4 w-16 h-16 bg-gradient-to-br from-gray-400/30 to-pink-400/30 rounded-full blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500" />
