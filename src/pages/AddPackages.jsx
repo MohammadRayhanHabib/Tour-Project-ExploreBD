@@ -16,6 +16,7 @@ const AddPackages = () => {
         departure_date: "",
         package_details: "",
         guide_contact_no: "",
+        bookingCount: 0
     };
 
     const [formData, setFormData] = useState(initialFormData);
@@ -32,6 +33,7 @@ const AddPackages = () => {
         const newPackage = {
             ...formData,
             price: parseFloat(formData.price),
+            bookingCount: parseInt(formData.bookingCount),
             guide_contact_no: parseInt(formData.guide_contact_no),
             guide_name: user?.displayName || "Unknown",
             guide_email: user?.email || "N/A",
