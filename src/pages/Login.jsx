@@ -9,69 +9,49 @@ const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
 
-    const { login, googleLogin } = useAuth();
+    const { login, googleLogin, loading, setLoading } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setLoading(true);
         setError("");
 
         try {
             await login(email, password);
+            Swal.fire({ title: "Login Successful!", icon: "success" });
             navigate("/");
-            Swal.fire({
-                title: "Login Successful!",
-                icon: "success",
-                draggable: true
-            });
-        } catch (error) {
-            console.error("Login error:", error);
-            setError("Invalid email or password. Please try again.");
-        } finally {
-            setLoading(false);
+        } catch (err) {
+            console.error("Login error:", err);
+            setError("Invalid email or password.");
+            Swal.fire({ title: "Login Failed!", icon: "error" });
+            setLoading(false); // ✅ Important: Reset loading if login failed
         }
     };
 
     const handleGoogleLogin = async () => {
-        setLoading(true);
         setError("");
-
         try {
+            setLoading(true);
             await googleLogin();
+            Swal.fire({ title: "Login Successful!", icon: "success" });
             navigate("/");
-            Swal.fire({
-                title: "Login Successful!",
-                icon: "success",
-                draggable: true
-            });
-        } catch (error) {
-            console.error("Google login error:", error);
-            setError("Google login failed. Please try again.");
-            Swal.fire({
-                icon: "error",
-                title: "Oops...",
-                text: "Something went wrong!",
-            });
-        } finally {
+        } catch (err) {
+            console.error("Google login error:", err);
+            setError("Google login failed.");
+            Swal.fire({ icon: "error", title: "Oops...", text: "Google login failed!" });
             setLoading(false);
         }
     };
 
     return (
         <>
-            <Helmet>
-                <title>Login</title>
-            </Helmet>
+            <Helmet><title>Login</title></Helmet>
 
-            <div className="min-h-screen flex items-center justify-center  py-12 px-4">
-                <div className="w-full max-w-md bg-base-100  border border-neutral/20 rounded-xl p-8
-        shadow-md overflow-hidden transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-accent-content   cursor-pointer
-                ">
-                    <h2 className="text-3xl font-bold text-center mb-6 text-base-content">Login Please</h2>
+            <div className="min-h-screen flex items-center justify-center py-12 px-4">
+                <div className="w-full max-w-md bg-base-100 border rounded-xl p-8 shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl">
+                    <h2 className="text-3xl font-bold text-center mb-6">Login Please</h2>
 
                     {error && (
                         <div className="alert alert-error mb-4">
@@ -81,9 +61,7 @@ const Login = () => {
 
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="label" htmlFor="email">
-                                <span className="label-text">Email Address</span>
-                            </label>
+                            <label className="label" htmlFor="email"><span className="label-text">Email Address</span></label>
                             <input
                                 id="email"
                                 type="email"
@@ -96,9 +74,7 @@ const Login = () => {
                         </div>
 
                         <div>
-                            <label className="label" htmlFor="password">
-                                <span className="label-text">Password</span>
-                            </label>
+                            <label className="label" htmlFor="password"><span className="label-text">Password</span></label>
                             <div className="relative">
                                 <input
                                     id="password"
@@ -111,7 +87,7 @@ const Login = () => {
                                 />
                                 <button
                                     type="button"
-                                    className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-600"
+                                    className="absolute top-1/2 right-3 transform -translate-y-1/2"
                                     onClick={() => setShowPassword(!showPassword)}
                                 >
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -124,26 +100,13 @@ const Login = () => {
                                 <input type="checkbox" className="checkbox checkbox-sm" />
                                 <span>Remember me</span>
                             </label>
-
-                            <Link
-                                to="/forgot-password"
-                                state={{ email }}
-                                className="link link-hover text-sm text-primary"
-                            >
+                            <Link to="/forgot-password" state={{ email }} className="link link-hover text-primary">
                                 Forgot password?
                             </Link>
                         </div>
 
-                        <button
-                            type="submit"
-                            className="btn btn-primary w-full"
-                            disabled={loading}
-                        >
-                            {loading ? (
-                                <span className="loading loading-spinner loading-sm"></span>
-                            ) : (
-                                "Sign In"
-                            )}
+                        <button type="submit" className="btn btn-primary w-full" disabled={loading}>
+                            {loading ? "Logging in..." : "Login"}
                         </button>
                     </form>
 
@@ -175,3 +138,4 @@ const Login = () => {
 };
 
 export default Login;
+

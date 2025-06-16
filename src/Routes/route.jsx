@@ -17,6 +17,7 @@ import Profile from "../pages/Profile";
 import MyBookings from "../pages/MyBookings";
 import PackageDetails from "../pages/PackageDetails.jsx"
 import BookingPage from "../pages/BookingPage.jsx";
+import UpdateTourPackage from "../pages/UpdateTourPackage.jsx";
 export const router = createBrowserRouter([
     {
         path: "/",
@@ -79,6 +80,11 @@ export const router = createBrowserRouter([
                 path: 'booking-page/:id',
                 element: <PrivateRoute>
                     <BookingPage></BookingPage>
+                </PrivateRoute>
+            }, {
+                path: 'update-tour-packages/:id',
+                element: <PrivateRoute>
+                    <UpdateTourPackage></UpdateTourPackage>
                 </PrivateRoute>
             }
 

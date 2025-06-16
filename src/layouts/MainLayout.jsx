@@ -4,6 +4,7 @@ import { Outlet, useNavigation } from 'react-router';
 import Footer from '../components/Footer';
 import { useAuth } from '../context/AuthContext';
 import Loading from '../components/Loading';
+// import Footer from '../components/Footer';
 const MainLayout = () => {
     const { loading: authLoading } = useAuth();
     const navigation = useNavigation();

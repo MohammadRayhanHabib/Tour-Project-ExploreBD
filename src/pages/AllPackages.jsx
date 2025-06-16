@@ -35,11 +35,11 @@ const AllPackages = () => {
                     Featured Packages
                 </h2>
 
-                <div className="relative w-full lg:w-80 h-10 flex items-center bg-white rounded-xl shadow-lg focus-within:ring-2 focus-within:ring-blue-300">
+                <div className="relative w-full lg:w-80 h-10 flex items-center border-2 border-blue-300  rounded-xl shadow-lg focus-within:ring-2 focus-within:ring-blue-300">
                     <Search className="absolute left-4 w-5 h-5 text-gray-400 pointer-events-none" />
                     <input
                         type="text"
-                        className="w-full pl-12 pr-4 py-1 text-sm font-medium text-gray-800 bg-transparent placeholder-gray-500 rounded-xl focus:outline-none"
+                        className=" w-full pl-12 pr-4 py-1 text-sm font-medium text-neutral bg-transparent placeholder-gray-500 rounded-xl focus:outline-none"
                         placeholder="Search by tour name..."
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}

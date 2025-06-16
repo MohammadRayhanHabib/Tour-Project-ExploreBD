@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
+import { UserCircle } from "lucide-react";
 
 const AddPackages = () => {
     const { user } = useAuth();
@@ -16,7 +17,7 @@ const AddPackages = () => {
         departure_date: "",
         package_details: "",
         guide_contact_no: "",
-        bookingCount: 0
+        bookingCount: 0,
     };
 
     const [formData, setFormData] = useState(initialFormData);
@@ -58,68 +59,100 @@ const AddPackages = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-cover bg-center" style={{ backgroundImage: `url('https://i.pinimg.com/736x/2c/8e/39/2c8e3992dd190f14e5fb5d52bbe11a1a.jpg')` }}>
-            <div className="bg-black/80 backdrop-blur-xs rounded-xl shadow-2xl max-w-6xl w-full">
+        <div className="min-h-screen flex items-center justify-center  p-6">
+            <div className="bg-gradient-to-br from-[#0f0f0f] via-[#1c1c1e] to-[#0f0f0f]  rounded-3xl  shadow-2xl max-w-6xl w-full overflow-hidden">
 
-                {/* Dropdown Tabs */}
-                <div className="flex justify-center gap-6 pt-6">
-                    <button onClick={() => setActiveTab("guide")} className={`px-6 py-2 rounded-lg font-semibold ${activeTab === "guide" ? "bg-white text-black" : "bg-black text-white border border-white"}`}>Guide Info</button>
-                    <button onClick={() => setActiveTab("form")} className={`px-6 py-2 rounded-lg font-semibold ${activeTab === "form" ? "bg-white text-black" : "bg-black text-white border border-white"}`}>Tour Form</button>
+                {/* Tabs */}
+                <div className="flex justify-center gap-4 pt-6">
+                    <button
+                        onClick={() => setActiveTab("guide")}
+                        className={`px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === "guide"
+                            ? "bg-purple-600 text-white shadow-lg"
+                            : "text-purple-400 border border-purple-700 hover:bg-purple-700/20"
+                            }`}
+                    >
+                        Guide Info
+                    </button>
+                    <button
+                        onClick={() => setActiveTab("form")}
+                        className={`px-6 py-2 rounded-full font-bold transition-all duration-300 ${activeTab === "form"
+                            ? "bg-purple-600 text-white shadow-lg"
+                            : "text-purple-400 border border-purple-700 hover:bg-purple-700/20"
+                            }`}
+                    >
+                        Tour Form
+                    </button>
                 </div>
 
-                <div className="p-10">
+                {/* Content */}
+                <div className="p-8 ">
                     {activeTab === "guide" && (
-                        <div className="text-white text-center space-y-6">
-                            <div>
-                                {user?.photoURL ? (
-                                    <img src={user.photoURL} alt="Guide" className="w-24 h-24 mx-auto rounded-full border-4 border-white shadow-xl" />
-                                ) : (
-                                    <div className="w-24 h-24 mx-auto rounded-full bg-gray-300 flex items-center justify-center text-gray-600">No Photo</div>
-                                )}
-                            </div>
-                            <h2 className="text-xl font-bold">{user?.displayName || "Unknown Guide"}</h2>
-                            <p className="text-sm font-medium">Email: {user?.email || "Not Provided"}</p>
+                        <div className="text-center text-white space-y-6 animate-fade-in">
+                            {user?.photoURL ? (
+                                <img
+                                    src={user.photoURL}
+                                    alt="Guide"
+                                    className="w-28 h-28 mx-auto rounded-full border-4 border-purple-500 shadow-xl"
+                                />
+                            ) : (
+                                <div className="w-28 h-28 mx-auto rounded-full bg-gray-700 flex items-center justify-center">
+                                    <UserCircle className="w-12 h-12 text-white" />
+                                </div>
+                            )}
+                            <h2 className="text-2xl font-bold">{user?.displayName || "Unknown Guide"}</h2>
+                            <p className="text-sm">Email: <span className="text-purple-400">{user?.email || "Not Provided"}</span></p>
                         </div>
                     )}
 
                     {activeTab === "form" && (
                         <>
-                            <h2 className="text-3xl font-bold text-center text-white mb-8">Add Tour Package</h2>
-                            {/* <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-10 p-2 rounded-xl text-black w-full">
-                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white/80" />
-                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white/80" />
-                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white/80" />
-                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white/80" />
-                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white/80" />
-                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white/80" />
-                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white/80" />
-                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white/80 " />
-                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered w-full   md:col-span-2 bg-white/80 " />
-                                <button type="submit" className="btn btn-white text-black md:col-span-2 w-full">Submit Package</button>
-                            </form> */}
+                            <h2 className="text-3xl text-center font-bold text-white mb-8">
+                                Add Tour Package
+                            </h2>
 
                             <form
                                 onSubmit={handleSubmit}
-                                className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:p-10 p-2 rounded-xl text-black w-full"
+                                className="grid grid-cols-1 md:grid-cols-2 gap-6"
                             >
-                                <input type="text" name="tour_name" placeholder="Tour Name" required onChange={handleChange} value={formData.tour_name} className="input input-bordered bg-white w-full " />
-                                <input type="text" name="image" placeholder="Image URL" required onChange={handleChange} value={formData.image} className="input input-bordered bg-white w-full" />
-                                <input type="text" name="duration" placeholder="Duration (e.g., 3 Days 2 Nights)" required onChange={handleChange} value={formData.duration} className="input input-bordered bg-white w-full" />
-                                <input type="text" name="departure_location" placeholder="Departure Location" required onChange={handleChange} value={formData.departure_location} className="input input-bordered bg-white w-full" />
-                                <input type="text" name="destination" placeholder="Destination" required onChange={handleChange} value={formData.destination} className="input input-bordered bg-white w-full" />
-                                <input type="number" name="price" placeholder="Price" required onChange={handleChange} value={formData.price} className="input input-bordered bg-white w-full" />
-                                <input type="date" name="departure_date" required onChange={handleChange} value={formData.departure_date} className="input input-bordered bg-white w-full" />
-                                <input type="text" name="guide_contact_no" placeholder="Contact No." required onChange={handleChange} value={formData.guide_contact_no} className="input input-bordered bg-white w-full" />
+                                {[
+                                    { name: "tour_name", placeholder: "Tour Name" },
+                                    { name: "image", placeholder: "Image URL" },
+                                    { name: "duration", placeholder: "Duration (e.g., 3 Days 2 Nights)" },
+                                    { name: "departure_location", placeholder: "Departure Location" },
+                                    { name: "destination", placeholder: "Destination" },
+                                    { name: "price", placeholder: "Price", type: "number" },
+                                    { name: "departure_date", type: "date" },
+                                    { name: "guide_contact_no", placeholder: "Contact No." },
+                                ].map(({ name, placeholder, type = "text" }) => (
+                                    <input
+                                        key={name}
+                                        name={name}
+                                        type={type}
+                                        placeholder={placeholder || ""}
+                                        required
+                                        value={formData[name]}
+                                        onChange={handleChange}
+                                        className="input input-bordered w-full bg-[#2a2a2e] border border-purple-700 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    />
+                                ))}
 
-                                {/* Textarea takes full width */}
-                                <textarea name="package_details" placeholder="Package Details" required onChange={handleChange} value={formData.package_details} className="textarea textarea-bordered bg-white w-full md:col-span-2" />
+                                <textarea
+                                    name="package_details"
+                                    placeholder="Package Details"
+                                    required
+                                    value={formData.package_details}
+                                    onChange={handleChange}
+                                    className="textarea textarea-bordered md:col-span-2 w-full bg-[#2a2a2e] border border-purple-700 text-white placeholder-purple-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+                                    rows={4}
+                                />
 
-                                {/* Submit button takes full width too */}
-                                <button type="submit" className="btn btn-white text-black w-full md:col-span-2">
-                                    Submit Package
+                                <button
+                                    type="submit"
+                                    className="md:col-span-2 bg-purple-700 hover:bg-purple-600 transition-all duration-300 text-white font-semibold py-3 rounded-xl shadow-lg hover:scale-105"
+                                >
+                                    🚀 Submit Package
                                 </button>
                             </form>
-
                         </>
                     )}
                 </div>
@@ -129,4 +162,6 @@ const AddPackages = () => {
 };
 
 export default AddPackages;
+
+
 
