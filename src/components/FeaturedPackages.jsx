@@ -2,7 +2,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router"; // ✅ use react-router-dom
-
+import { MousePointerClick, MoveRight } from "lucide-react"
 const FeaturedPackages = () => {
     const [packages, setPackages] = useState([]);
 
@@ -70,11 +70,18 @@ const FeaturedPackages = () => {
 
             {/* Show All Button */}
             <div className="text-center mt-10">
-                <Link
-                    to="/all-packages"
+                {/* <Link
+
                     className="bg-gray-900 text-white px-6 py-3 rounded-full font-semibold hover:bg-black transition"
                 >
                     Show All
+                </Link> */}
+                <Link to="/all-packages" class="relative inline-flex items-center justify-center p-4 px-6 py-3 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-neutral rounded-full shadow-md group">
+                    <span class="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-neutral group-hover:translate-x-0 ease">
+                        <MoveRight className="text-cyan-500" />
+                    </span>
+                    <span class="absolute flex items-center justify-center w-full h-full text-neutral transition-all duration-300 transform group-hover:translate-x-full ease">Show All <MousePointerClick className="ml-4" /></span>
+                    <span class="relative invisible">Button Text</span>
                 </Link>
             </div>
         </div>

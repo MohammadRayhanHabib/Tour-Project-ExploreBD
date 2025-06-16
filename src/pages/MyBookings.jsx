@@ -2,13 +2,21 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useAuth } from "../context/AuthContext";
+import {
+    CheckCircle,
+    Phone,
+    MapPin,
+    Calendar,
+    User,
+    Plane,
+} from "lucide-react";
 
 const MyBookings = () => {
     const { user } = useAuth();
     const [bookings, setBookings] = useState([]);
     const [loading, setLoading] = useState(true);
+    // console.log(bookings.);
 
-    // Fetch bookings made by logged-in user
     useEffect(() => {
         if (!user) return;
 
@@ -31,6 +39,7 @@ const MyBookings = () => {
             await axios.patch(`http://localhost:3000/bookings/${bookingId}`, {
                 status: "completed",
             });
+
             Swal.fire({
                 icon: "success",
                 title: "Booking Confirmed!",
@@ -39,7 +48,7 @@ const MyBookings = () => {
                 timer: 1500,
                 showConfirmButton: false,
             });
-            // Update locally after confirmation
+
             setBookings((prev) =>
                 prev.map((b) =>
                     b.id === bookingId ? { ...b, status: "completed" } : b
@@ -54,67 +63,82 @@ const MyBookings = () => {
         }
     };
 
-    if (loading) return <p className="text-teal-400 text-center mt-10">Loading your bookings...</p>;
+
+    // if (loading)
+    //     return <p className="text-teal-400 text-center mt-10">Loading your bookings...</p>;
 
     if (!bookings.length)
         return <p className="text-teal-400 text-center mt-10">No bookings found.</p>;
 
     return (
-        <div className="max-w-7xl mx-auto p-6 bg-teal-900 min-h-screen rounded-lg">
-            <h1 className="text-4xl font-bold text-white mb-8 text-center">My Bookings</h1>
-            <div className="overflow-x-auto">
-                <table className="min-w-full bg-teal-800 rounded-lg overflow-hidden">
-                    <thead className="bg-teal-700 text-white">
-                        <tr>
-                            <th className="text-left py-3 px-6">Tour Name</th>
-                            <th className="text-left py-3 px-6">Guide Name + Contact</th>
-                            <th className="text-left py-3 px-6">Departure Date</th>
-                            <th className="text-left py-3 px-6">Departure Location</th>
-                            <th className="text-left py-3 px-6">Destination</th>
-                            <th className="text-left py-3 px-6">Special Note</th>
-                            <th className="text-center py-3 px-6">Status / Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {bookings.map((booking) => (
-                            <tr
-                                key={booking.id}
-                                className="border-b border-teal-600 even:bg-teal-900"
-                            >
-                                <td className="py-3 px-6 text-white">{booking.tour_name}</td>
-                                <td className="py-3 px-6 text-white">
-                                    {booking.guide_name}
-                                    <br />
-                                    <a
-                                        href={`tel:${booking.guide_contact_no}`}
-                                        className="text-teal-300 underline"
+        <div className="max-w-5xl mx-auto p-6">
+            <h2 className="text-3xl font-bold text-neutral mb-6 text-center">📋 My Bookings</h2>
+            <ul className="list bg-base-200 rounded-box shadow-md divide-y divide-base-300">
+                {bookings.map((booking) => (
+                    <li
+                        key={booking._id}
+                        className="list-row py-4 px-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6"
+                    >
+                        <div className="flex-shrink-0 bg-base-100 p-3 rounded-lg">
+                            <Plane className="text-teal-400 size-6" />
+                        </div>
+
+                        <div className="flex-1 space-y-2">
+                            <div>
+                                <div className="font-semibold text-lg text-black">{booking.tour_name}</div>
+                                <div className="text-xs uppercase text-gray-600 tracking-wide">
+                                    Destination: {booking.destination}
+                                </div>
+                            </div>
+
+                            <p className="text-sm text-black flex items-center gap-2">
+                                <User className="size-4 text-gray-500" />
+                                Guide Name : {booking.guide_name}
+                            </p>
+
+
+
+                            {booking.notes && (
+                                <p className="text-sm ">
+                                    📝 <span className="italic text-black">{booking.notes}</span>
+                                </p>
+                            )}
+
+                            <p className="text-sm text-gray-500 flex items-center gap-2">
+                                <Calendar className="size-4" />
+                                Departure Date :
+                                {new Date(booking.departure_date).toLocaleDateString()}
+                                <span className="mx-1">|</span>
+                                <MapPin className="size-4" />
+                                Departure location : {booking.departure_location}
+                            </p>
+
+                            {/* {booking.special_note && (
+                                <p className="text-xs italic text-yellow-500">📌 Note: {booking.notes}</p>
+                            )} */}
+
+                            <div className="mt-2">
+                                {booking.status === "completed" ? (
+                                    <span className="text-green-500 flex items-center gap-2 font-semibold">
+                                        <CheckCircle className="size-4" />
+                                        Completed
+                                    </span>
+                                ) : (
+                                    <button
+                                        onClick={() => handleConfirm(booking._id)}
+                                        className="btn btn-sm bg-cyan-500 hover:bg-gray-400 text-white"
                                     >
-                                        {booking.guide_contact_no}
-                                    </a>
-                                </td>
-                                <td className="py-3 px-6 text-white">
-                                    {new Date(booking.departure_date).toLocaleDateString()}
-                                </td>
-                                <td className="py-3 px-6 text-white">{booking.departure_location}</td>
-                                <td className="py-3 px-6 text-white">{booking.destination}</td>
-                                <td className="py-3 px-6 text-white">{booking.special_note || "-"}</td>
-                                <td className="py-3 px-6 text-center">
-                                    {booking.status === "completed" ? (
-                                        <span className="text-green-400 font-semibold">Completed</span>
-                                    ) : (
-                                        <button
-                                            onClick={() => handleConfirm(booking.id)}
-                                            className="bg-teal-500 hover:bg-teal-400 text-white py-1 px-4 rounded transition"
-                                        >
-                                            Confirm
-                                        </button>
-                                    )}
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
-            </div>
+                                        Pending - Click to Confirm
+                                    </button>
+
+                                )}
+                                <p>{booking._id}</p>
+                            </div>
+
+                        </div>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 };

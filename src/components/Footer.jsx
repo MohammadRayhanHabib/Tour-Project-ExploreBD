@@ -2,7 +2,7 @@ import { Github, Linkedin } from "lucide-react";
 
 const Footer = () => {
     return (
-        <footer className="bg-teal-950 text-white mt-12">
+        <footer className="bg-teal-950 text-white w-full ">
             <div className="max-w-7xl mx-auto px-6 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
                 {/* Branding */}
                 <div className="text-center md:text-left">
@@ -35,10 +35,11 @@ const Footer = () => {
 
             {/* Bottom Bar */}
             <div className="border-t border-teal-800 py-4 text-center text-sm text-teal-300">
-                © {new Date().getFullYear()} WanderMate. All rights reserved.
+                © {new Date().getFullYear()} ExploreBD. All rights reserved.
             </div>
         </footer>
     );
 };
 
 export default Footer;
+
