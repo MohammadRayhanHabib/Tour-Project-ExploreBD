@@ -1,13 +1,73 @@
-# React + Vite
+# Tour Package Booking Management — Client Side
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Project Purpose
 
-Currently, two official plugins are available:
+This React-based client application serves as the front end for a full-stack Tour Package Booking Management platform. It enables users to explore travel packages, book tours, and manage their own packages with a smooth and engaging user experience. The app integrates Firebase Authentication for secure login and supports responsive design for all devices.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# b11a11-client-side-MohammadRayhanHabib
+- Browse featured and all tour packages with search functionality
+- User authentication via Firebase (Email/Password & Google Sign-In)
+- Private routes for booking packages and managing tours
+- Add, update, and delete tour packages (for guides)
+- Booking management with status updates
+- Animated UI elements with Framer Motion
+- Typewriter effect on titles with react-simple-typewriter
+- Responsive layout with Tailwind CSS and DaisyUI
+- Clean icons using Lucide React
+- Form handling and validation with react-hook-form
+- Toast notifications for success/error feedback
+- Confirmation dialogs using SweetAlert2
+
+---
+
+## Live URL
+
+[https://your-live-site-url.com](https://your-live-site-url.com)
+
+---
+
+## Tech Stack
+
+- React  
+- React Router v6  
+- Tailwind CSS  
+- DaisyUI  
+- Firebase Authentication  
+- Axios  
+- Framer Motion  
+- react-simple-typewriter  
+- react-hook-form  
+- Lucide React  
+- react-countup  
+- SweetAlert2  
+
+---
+
+## NPM Packages Used
+
+- `react`  
+- `react-dom`  
+- `react-router-dom`  
+- `firebase`  
+- `axios`  
+- `framer-motion`  
+- `react-simple-typewriter`  
+- `react-hook-form`  
+- `lucide-react`  
+- `react-countup`  
+- `sweetalert2`  
+- `daisyui`  
+- `tailwindcss`  
+
+---
+
+## Installation & Setup
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/your-client-repo.git
+cd your-client-repo
