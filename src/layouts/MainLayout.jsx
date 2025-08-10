@@ -17,7 +17,7 @@ const MainLayout = () => {
             </nav>
 
             {/* Main content fills available space */}
-            <main className="flex-grow">
+            <main className="flex-grow mt-18">
                 {authLoading || navigation.state === 'loading' ? (
                     <Loading />
                 ) : (

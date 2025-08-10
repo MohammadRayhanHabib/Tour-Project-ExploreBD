@@ -12,10 +12,9 @@ const Navbar = () => {
 
 
     return (
-        <div className="">
+        <div className=" fixed top-0 left-0 right-0 z-50 w-full  text-white shadow-md   ">
             <nav className="
-
-        flex justify-between items-center lg:px-8 px-1 py-4 max-w-[1280px] mx-auto ">
+                flex justify-between items-center lg:px-8 px-1 py-4 max-w-[1280px] mx-auto ">
                 {/* Left: Logo + Menu */}
                 <div className="flex items-center gap-10">
                     {/* Logo */}
