@@ -21,8 +21,8 @@ const RecentProducts = () => {
     if (loading)
         return <p className="text-center text-white mt-10">Loading products...</p>;
 
-    retur
-        < section className = "w-full px-6 py-20 bg-[#0f172a]" >
+    return (
+        <section className="w-full px-6 py-20 bg-[#0f172a]">
             <div className="max-w-7xl mx-auto text-center">
                 <h2 className="text-5xl font-extrabold mb-6 tracking-tight text-neutral">
                     Recent <span className="text-teal-400">Products</span>
@@ -45,7 +45,7 @@ const RecentProducts = () => {
                     ))}
                 </div>
             </div>
-    </section >
+        </section>
     );
 };
 
