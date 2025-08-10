@@ -5,6 +5,7 @@ import StatsSection from '../components/StatsSection';
 import WhyTravelWithUs from '../components/WhyTravelWithUs';
 import RecentProducts from '../components/RecentProducts';
 import SalesOffers from '../components/SalesOffers';
+import ReviewsTestimonials from '../components/ReviewsTestimonials';
 const Home = () => {
     return (
         <div>
@@ -12,6 +13,7 @@ const Home = () => {
             <FeaturedPackages></FeaturedPackages>
             <RecentProducts></RecentProducts>
             <SalesOffers></SalesOffers>
+            <ReviewsTestimonials></ReviewsTestimonials>
             <WhyTravelWithUs></WhyTravelWithUs>
             <StatsSection></StatsSection>
         </div>

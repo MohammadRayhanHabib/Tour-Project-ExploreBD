@@ -3,26 +3,26 @@ import { Eye } from "lucide-react";
 const Stats = () => {
     return (
         <section className="w-full px-4 py-12 ">
-            <div className="max-w-[1280px] mx-auto rounded-3xl shadow-2xl p-8  border border-neutral-100">
-                <h2 className="text-3xl md:text-4xl font-bold text-center text-neutral mb-12">
+            <div className="max-w-[1280px] mx-auto rounded-3xl p-8   ">
+                <h2 className="text-5xl md:text-4xl font-bold text-center text-neutral mb-12">
                     Tour Platform Stats
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white">
                     {/* Total Downloads */}
-                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg hover:transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                         <div className="text-teal-400 mb-2">
 
                             <Eye className="w-10 h-10" />
                         </div>
                         <h3 className="text-xl font-semibold mb-1">Total Visitor</h3>
                         <p className="text-3xl font-bold text-teal-300">
-                            <CountUp end={31000} duration={20} separator="," />
+                            <CountUp end={31000} duration={100} separator="," />
                         </p>
                         <span className="text-sm mt-2 text-gray-400">Since Launch</span>
                     </div>
 
                     {/* New Users */}
-                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                         <div className="text-purple-400 mb-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -47,7 +47,7 @@ const Stats = () => {
                     </div>
 
                     {/* Bookings */}
-                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg hover:shadow-xl transition">
+                    <div className="flex flex-col items-center bg-[#0f172a] rounded-xl p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 hover:shadow-2xl">
                         <div className="text-pink-400 mb-2">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
