@@ -22,7 +22,7 @@ const MyBookings = () => {
 
         const fetchBookings = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/bookings/${user?.email}`);
+                const res = await axios.get(`https://assignment11-teal.vercel.app/bookings/${user?.email}`);
                 setBookings(res.data);
             } catch (error) {
                 console.error("Failed to fetch bookings:", error);
@@ -36,7 +36,7 @@ const MyBookings = () => {
 
     const handleConfirm = async (bookingId) => {
         try {
-            await axios.patch(`http://localhost:3000/bookings/${bookingId}`, {
+            await axios.patch(`https://assignment11-teal.vercel.app/bookings/${bookingId}`, {
                 status: "completed",
             });
 
@@ -67,8 +67,22 @@ const MyBookings = () => {
     // if (loading)
     //     return <p className="text-teal-400 text-center mt-10">Loading your bookings...</p>;
 
-    if (!bookings.length)
-        return <p className="text-teal-400 text-center mt-10">No bookings found.</p>;
+    if (bookings.length === 0) {
+
+
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-neutral"></div>
+            </div>
+            // <div className="flex justify-center items-center min-h-screen bg-base-200">
+            //     <span className="loading loading-spinner text-primary"></span>
+            // </div>
+
+        )
+
+    };
+
+
 
     return (
         <div className="max-w-5xl mx-auto p-6">

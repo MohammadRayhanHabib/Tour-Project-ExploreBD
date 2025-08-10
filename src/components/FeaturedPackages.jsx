@@ -7,7 +7,7 @@ const FeaturedPackages = () => {
     const [packages, setPackages] = useState([]);
 
     useEffect(() => {
-        axios("http://localhost:3000/tour-packages")
+        axios("https://assignment11-teal.vercel.app/tour-packages")
             .then((res) => setPackages(res.data.slice(0, 6)))
             .catch((err) => console.error("Fetch error:", err));
     }, []);

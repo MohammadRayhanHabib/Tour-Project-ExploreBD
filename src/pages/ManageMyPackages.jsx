@@ -15,7 +15,7 @@ const ManageMyPackages = () => {
     useEffect(() => {
         if (user?.email) {
             const encodedEmail = encodeURIComponent(user.email);
-            axios(`http://localhost:3000/tour-packages/guide/${encodedEmail}`)
+            axios(`https://assignment11-teal.vercel.app/tour-packages/guide/${encodedEmail}`)
                 .then(res => setMyPackages(res.data))
                 .catch(err => console.error("Error fetching packages:", err));
         }
@@ -32,7 +32,7 @@ const ManageMyPackages = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axios.delete(`http://localhost:3000/tour-packages/${id}`)
+                axios.delete(`https://assignment11-teal.vercel.app/tour-packages/${id}`)
                     .then(() => {
                         Swal.fire('Deleted!', 'The package has been deleted.', 'success');
                         setMyPackages(prev => prev.filter(pkg => pkg._id !== id));
@@ -46,11 +46,15 @@ const ManageMyPackages = () => {
 
     if (myPackages.length === 0) {
         return (
-            <div className='text-center py-20 bg-gradient-to-br from-purple-100 via-white to-indigo-100'>
-                <h2 className='text-3xl font-bold text-white drop-shadow-md'>No Data Found</h2>
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-neutral"></div>
             </div>
+            // <div className="flex justify-center items-center min-h-screen bg-base-200">
+            //     <span className="loading loading-spinner text-primary"></span>
+            // </div>
         );
     }
+
 
     return (
         <div className='max-w-[1280px] mx-auto mt-10 rounded-xl bg-[url("https://images.unsplash.com/photo-1506744038136-46273834b3fb")] bg-cover bg-center bg-no-repeat shadow-2xl'>

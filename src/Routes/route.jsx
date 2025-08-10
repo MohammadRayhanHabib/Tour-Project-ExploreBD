@@ -72,9 +72,9 @@ export const router = createBrowserRouter([
             },
             {
                 path: 'package-details/:id',
-                element: <PrivateRoute>
+                element:
                     <PackageDetails></PackageDetails>
-                </PrivateRoute>
+
             },
             {
                 path: 'booking-page/:id',

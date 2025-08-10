@@ -31,7 +31,7 @@ const UpdateTourPackage = () => {
     useEffect(() => {
         const fetchTourData = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/tour-packages/${id}`);
+                const res = await axios.get(`https://assignment11-teal.vercel.app/tour-packages/${id}`);
                 setFormData(res.data);
             } catch (err) {
                 console.error("Failed to fetch tour data:", err);
@@ -62,7 +62,7 @@ const UpdateTourPackage = () => {
         };
 
         try {
-            await axios.patch(`http://localhost:3000/tour-packages/${id}`, updatedPackage);
+            await axios.patch(`https://assignment11-teal.vercel.app/tour-packages/${id}`, updatedPackage);
             Swal.fire({
                 icon: "success",
                 title: "Package Updated!",
@@ -92,7 +92,7 @@ const UpdateTourPackage = () => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axios.delete(`http://localhost:3000/tour-packages/${id}`);
+                    await axios.delete(`https://assignment11-teal.vercel.app/tour-packages/${id}`);
                     Swal.fire("Deleted!", "The package has been deleted.", "success");
                     navigate("/manage-my-packages");
                 } catch (err) {

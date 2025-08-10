@@ -24,7 +24,7 @@ const BookingPage = () => {
     useEffect(() => {
         const fetchTour = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/tour-packages/${id}`);
+                const res = await axios.get(`https://assignment11-teal.vercel.app/tour-packages/${id}`);
                 setTour(res.data);
             } catch (error) {
                 console.error("Failed to fetch tour:", error);
@@ -52,7 +52,7 @@ const BookingPage = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:3000/bookings", bookingData);
+            const res = await axios.post("https://assignment11-teal.vercel.app/bookings", bookingData);
             if (res.data.insertedId) {
                 Swal.fire("Success", "Booking Submitted!", "success");
                 setNotes("");

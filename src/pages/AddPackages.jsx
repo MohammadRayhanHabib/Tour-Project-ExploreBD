@@ -42,7 +42,7 @@ const AddPackages = () => {
         };
 
         try {
-            const res = await axios.post("http://localhost:3000/tour-packages", newPackage);
+            const res = await axios.post("https://assignment11-teal.vercel.app/tour-packages", newPackage);
             if (res.data.insertedId) {
                 Swal.fire({
                     position: "top-end",

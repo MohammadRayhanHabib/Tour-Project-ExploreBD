@@ -12,7 +12,7 @@ const Navbar = () => {
 
 
     return (
-        <div className=" fixed top-0 left-0 right-0 z-50 w-full  text-white shadow-md   ">
+        <div className=" fixed top-0 left-0 right-0 z-50 w-full bg-gray/80 backdrop-blur-md text-white shadow-md ">
             <nav className="
                 flex justify-between items-center lg:px-8 px-1 py-4 max-w-[1280px] mx-auto ">
                 {/* Left: Logo + Menu */}
@@ -80,7 +80,7 @@ const Navbar = () => {
                     </ul>
                 </div>
                 {/* Right: Buttons */}
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 text-neutral">
                     <div>
                         <label className="swap swap-rotate">
                             {/* this hidden checkbox controls the state */}

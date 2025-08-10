@@ -15,8 +15,8 @@ const AllPackages = () => {
             try {
                 const res = await axios.get(
                     search
-                        ? `http://localhost:3000/tour-packages?search=${search}`
-                        : `http://localhost:3000/tour-packages`
+                        ? `https://assignment11-teal.vercel.app/tour-packages?search=${search}`
+                        : `https://assignment11-teal.vercel.app/tour-packages`
                 );
                 setPackages(res.data);
             } catch (error) {
@@ -26,6 +26,24 @@ const AllPackages = () => {
 
         fetchTours();
     }, [search]);
+
+    if (packages.length === 0) {
+
+
+        return (
+            <div className="flex items-center justify-center min-h-screen">
+                <div className="w-12 h-12 border-4 border-dashed rounded-full animate-spin border-neutral"></div>
+            </div>
+            // <div className="flex justify-center items-center min-h-screen bg-base-200">
+            //     <span className="loading loading-spinner text-primary"></span>
+            // </div>
+
+        )
+
+    };
+
+
+
 
     return (
         <div className="my-12 px-4 max-w-[1280px] mx-auto">
@@ -111,11 +129,11 @@ const AllPackages = () => {
             </div>
 
             {/* No result message */}
-            {
+            {/* {
                 packages.length === 0 && (
                     <p className="text-center mt-10 text-gray-400 text-lg">No packages found.</p>
                 )
-            }
+            } */}
         </div >
     );
 };

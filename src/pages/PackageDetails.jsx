@@ -15,7 +15,7 @@ const PackageDetails = () => {
     // console.log(tour);
 
     useEffect(() => {
-        axios(`http://localhost:3000/tour-packages/${id}`)
+        axios(`https://assignment11-teal.vercel.app/tour-packages/${id}`)
             .then(res => setTour(res.data))
             .catch(err => console.error("Failed to fetch tour package:", err));
     }, [id]);
